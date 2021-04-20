@@ -19,8 +19,11 @@ dev_dependencies:
 
   flutter_pjsip:
     path: ../
-
-  fluttertoast: 2.2.11
+  sip_native:
+    git:
+      url: https://github.com/Ally-Innovations/sip_storiez.git
+      ref: 693940392ca15dd04b3316a4d58f3584cb2e18ed
+  fluttertoast: ^8.0.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

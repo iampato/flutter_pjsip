@@ -12,29 +12,13 @@ class FlutterPjsip {
 
   static final pjsip = FlutterPjsip();
 
-  ///工厂模式
-  factory FlutterPjsip() => _getInstance();
-
-  static FlutterPjsip get instance => _getInstance();
-  static FlutterPjsip _instance;
-
-  static FlutterPjsip _getInstance() {
-    if (_instance == null) {
-      _instance = new FlutterPjsip._internal();
-    }
-    return _instance;
+  static final FlutterPjsip _flutterPjsip = FlutterPjsip._internal();
+  factory FlutterPjsip() {
+    return _flutterPjsip;
   }
+  FlutterPjsip._internal();
 
-  FlutterPjsip._internal() {
-    ///初始化
-    _channel.setMethodCallHandler((MethodCall call) async {
-      try {
-        _doHandlePlatformCall(call);
-      } catch (exception) {
-        print('Unexpected error: $exception');
-      }
-    });
-  }
+  HttpClient httpClient = HttpClient();
 
   static Future<void> _doHandlePlatformCall(MethodCall call) async {
     final Map<dynamic, dynamic> callArgs = call.arguments as Map;
