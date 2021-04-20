@@ -18,8 +18,6 @@ class FlutterPjsip {
   }
   FlutterPjsip._internal();
 
-  HttpClient httpClient = HttpClient();
-
   static Future<void> _doHandlePlatformCall(MethodCall call) async {
     final Map<dynamic, dynamic> callArgs = call.arguments as Map;
 //    final remoteUri = callArgs['remote_uri'];
