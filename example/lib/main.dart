@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void initSipPlugin() {
-    _pjsip = FlutterPjsip.instance;
+    _pjsip = FlutterPjsip();
     _pjsip.onSipStateChanged.listen((map) {
       final state = map['call_state'];
       final remoteUri = map['remote_uri'];
