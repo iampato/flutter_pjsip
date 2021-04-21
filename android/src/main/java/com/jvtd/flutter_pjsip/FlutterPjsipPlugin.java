@@ -309,19 +309,19 @@ public class FlutterPjsipPlugin implements FlutterPlugin, MethodCallHandler, Act
      * Plugin registration.
      */
     @Override
-    public void onAttachedToEngine(@NonNull @org.jetbrains.annotations.NotNull FlutterPlugin.FlutterPluginBinding binding) {
+    public void onAttachedToEngine(@NonNull  FlutterPlugin.FlutterPluginBinding binding) {
         final MethodChannel channel = new MethodChannel(binding.getBinaryMessenger(), CHANNEL);
         this.mChannel = channel;
-        channel.setMethodCallHandler(new FlutterPjsipPlugin(channel, registrar.activity()));
+        channel.setMethodCallHandler(this);
         registerAudioManager();
     }
 
     @Override
-    public void onDetachedFromEngine(@NonNull @org.jetbrains.annotations.NotNull FlutterPlugin.FlutterPluginBinding binding) {
+    public void onDetachedFromEngine(@NonNull FlutterPlugin.FlutterPluginBinding binding) {
         this.mActivity = null;
     }
     @Override
-    public void onAttachedToActivity(@NonNull @org.jetbrains.annotations.NotNull ActivityPluginBinding binding) {
+    public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
         this.mActivity = binding.getActivity();
     }
 
@@ -331,7 +331,7 @@ public class FlutterPjsipPlugin implements FlutterPlugin, MethodCallHandler, Act
     }
 
     @Override
-    public void onReattachedToActivityForConfigChanges(@NonNull @org.jetbrains.annotations.NotNull ActivityPluginBinding binding) {
+    public void onReattachedToActivityForConfigChanges(@NonNull  ActivityPluginBinding binding) {
         this.mActivity = binding.getActivity();
     }
 
