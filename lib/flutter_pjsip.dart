@@ -8,15 +8,33 @@ class FlutterPjsip {
   final StreamController<Map<dynamic, dynamic>> _sipStateController =
       StreamController<Map<dynamic, dynamic>>.broadcast();
 
-  Stream<Map<dynamic, dynamic>> get onSipStateChanged => _sipStateController.stream;
+  Stream<Map<dynamic, dynamic>> get onSipStateChanged =>
+      _sipStateController.stream;
 
   static final pjsip = FlutterPjsip();
 
-  static final FlutterPjsip _flutterPjsip = FlutterPjsip._internal();
-  factory FlutterPjsip() {
-    return _flutterPjsip;
+  factory FlutterPjsip() => _getInstance();
+
+  static FlutterPjsip get instance => _getInstance();
+  static FlutterPjsip _instance;
+
+  static FlutterPjsip _getInstance() {
+    if (_instance == null) {
+      _instance = new FlutterPjsip._internal();
+    }
+    return _instance;
   }
-  FlutterPjsip._internal();
+
+  FlutterPjsip._internal() {
+    ///初始化
+    _channel.setMethodCallHandler((MethodCall call) async {
+      try {
+        _doHandlePlatformCall(call);
+      } catch (exception) {
+        print('Unexpected error: $exception');
+      }
+    });
+  }
 
   static Future<void> _doHandlePlatformCall(MethodCall call) async {
     final Map<dynamic, dynamic> callArgs = call.arguments as Map;
@@ -30,15 +48,20 @@ class FlutterPjsip {
         print('Unknown method ${call.method} ');
     }
   }
-
   ///pjsip初始化
   Future<bool> pjsipInit() async {
     return await _channel.invokeMethod('method_pjsip_init');
   }
 
   ///pjsip登录
-  Future<bool> pjsipLogin({String username, String password, String ip, String port}) async {
-    Map<String, String> map = {"username": username, "password": password, "ip": ip, "port": port};
+  Future<bool> pjsipLogin(
+      {String username, String password, String ip, String port}) async {
+    Map<String, String> map = {
+      "username": username,
+      "password": password,
+      "ip": ip,
+      "port": port
+    };
     return await _channel.invokeMethod("method_pjsip_login", map);
   }
 

@@ -94,7 +94,6 @@ public class FlutterPjsipPlugin implements FlutterPlugin, MethodCallHandler, Act
             if (TextUtils.equals(mMethod, METHOD_PJSIP_LOGIN)) {
                 boolean loginResult = code.swigValue() / 100 == 2;
                 mMethod = "";
-
                 Message m = Message.obtain(handler, MSG_TYPE.REG_STATE, loginResult);
                 m.sendToTarget();
             }
@@ -339,7 +338,6 @@ public class FlutterPjsipPlugin implements FlutterPlugin, MethodCallHandler, Act
     public void onDetachedFromActivity() {
 
     }
-
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {

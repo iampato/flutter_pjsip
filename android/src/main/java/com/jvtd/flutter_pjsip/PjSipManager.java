@@ -131,7 +131,7 @@ public class PjSipManager
     }
 
     TransportConfig sipTpConfig = new TransportConfig();
-    int SIP_PORT = 6050;
+    int SIP_PORT = 5060;
 
     /* Set SIP port back to default for JSON saved config */
     sipTpConfig.setPort(SIP_PORT);
