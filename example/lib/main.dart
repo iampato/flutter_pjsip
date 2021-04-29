@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
     _pjsip.onSipStateChanged.listen((map) {
       final state = map['call_state'];
       final remoteUri = map['remote_uri'];
-      print('收到状态: $state');
+      print('state: $state');
       switch (state) {
         case "CALLING":
           break;
